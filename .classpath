@@ -24,7 +24,6 @@
 	<classpathentry kind="lib" path="libs/selenium-java-3.0.1/jetty-util-9.2.13.v20150730.jar"/>
 	<classpathentry kind="lib" path="libs/selenium-java-3.0.1/jna-4.1.0.jar"/>
 	<classpathentry kind="lib" path="libs/selenium-java-3.0.1/jna-platform-4.1.0.jar"/>
-	<classpathentry kind="lib" path="libs/selenium-java-3.0.1/junit-4.12.jar"/>
 	<classpathentry kind="lib" path="libs/selenium-java-3.0.1/neko-htmlunit-2.23.jar"/>
 	<classpathentry kind="lib" path="libs/selenium-java-3.0.1/netty-3.5.7.Final.jar"/>
 	<classpathentry kind="lib" path="libs/selenium-java-3.0.1/phantomjsdriver-1.3.0.jar"/>
@@ -37,5 +36,6 @@
 	<classpathentry kind="lib" path="libs/selenium-java-3.0.1/xercesImpl-2.11.0.jar"/>
 	<classpathentry kind="lib" path="libs/selenium-java-3.0.1/xml-apis-1.4.01.jar"/>
 	<classpathentry kind="lib" path="libs/TestNg/testng-6.9.9.jar"/>
+	<classpathentry kind="lib" path="libs/TestNg/jcommander-1.27.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

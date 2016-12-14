@@ -40,7 +40,7 @@ public class PageTest {
 		System.setProperty("webdriver.chrome.driver", driverPath + "chromedriver_win.exe");
 		WebDriver driver = new ChromeDriver();
 		driver.manage().window().maximize();
-		driver.navigate().to(appURL);
+		//driver.navigate().to(appURL);
 		return driver;
 	}
 
@@ -49,7 +49,7 @@ public class PageTest {
 		System.setProperty("webdriver.firefox.marionette", driverPath + "geckodriver_win64.exe");
 		WebDriver driver = new FirefoxDriver();
 		driver.manage().window().maximize();
-		driver.navigate().to(appURL);
+		//driver.navigate().to(appURL);
 		return driver;
 	}
 
