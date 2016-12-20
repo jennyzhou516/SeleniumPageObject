@@ -9,7 +9,7 @@ import page.object.Home;
 import page.object.Home1;
 import pages.base.PageTest;
 
-public class HomeTest extends PageTest {
+public class HomeTest1 extends PageTest {
 	private WebDriver driver;
 	private Home homeObject ;
 	private Home1 home1Object ;
@@ -25,7 +25,6 @@ public class HomeTest extends PageTest {
 	public void verifyTitle(){
 		System.out.println("Verify title of home page");
 		Assert.assertEquals(driver.getTitle(), "Google");
-		Assert.assertTrue(false, "hehehehehehe");
 	}
 	
 	@Test
