@@ -9,7 +9,7 @@ import pages.base.PageObject;
 
 public class Home1 extends PageObject {
 	// Define elements ****************************************************
-		@FindBy(xpath = ".//*[@id='_fZl']")
+		@FindBy(name="btnG")
 		public WebElement search_btn;
 		
 		

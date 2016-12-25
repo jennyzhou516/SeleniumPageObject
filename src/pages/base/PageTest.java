@@ -1,30 +1,43 @@
 package pages.base;
 
+import java.io.File;
 import java.lang.reflect.Method;
+import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
+
+import utilites.DateTime;
+import utilites.FolderFile;
+
 
 public class PageTest {
-	private WebDriver driver;
-	static String driverPath = "./web-driver";
-	static String appURL = "https://www.google.com.vn/";
-	
+	private  WebDriver driver;
+	private static String driverPath = "./web-driver";
+	private static String appURL = "https://www.google.com.vn/";
+
 	private static ExtentReports extent;
-    private static ThreadLocal<ExtentTest> parentTest = new ThreadLocal();
-    private static ThreadLocal<ExtentTest> test = new ThreadLocal();
+	protected ExtentTest test;
+
+	private static String reportFolder="";
+
+	final String reportPath = "./Extent.html";
 
 	public WebDriver getDriver() {
 		return driver;
@@ -43,6 +56,7 @@ public class PageTest {
 					+ " is invalid, Launching Firefox as browser of choice..");
 			driver = initFirefoxDriver(appURL);
 		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 
 	private static WebDriver initChromeDriver(String appURL){
@@ -61,30 +75,23 @@ public class PageTest {
 		driver.manage().window().maximize();
 		return driver;
 	}
-	
+
 	@BeforeSuite
-	public void beforeSuite() {
-		extent = ExtentManager.createInstance("extent.html");
-		ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter("extent.html");
-		extent.attachReporter(htmlReporter);
+	protected void beforeSuite() {
+		reportFolder = DateTime.getCurrentTime("MM-dd-yyyy_HHmmss");
+		String reportPath = "test-reports/" + reportFolder + "/images";
+		FolderFile.createMutilFolder(reportPath);
+		extent = ExtentManager.getReporter("test-reports/" + reportFolder + "/ExtentReport.html");
 	}
-	
+
 
 	@BeforeClass
-	public synchronized void beforeClass() {
-//		try {
-//			setDriver(browserType);
-//
-//		} catch (Exception e) {
-//			System.out.println("Error....." + e.getStackTrace());
-//		}
-		ExtentTest parent = extent.createTest(getClass().getName());
-        parentTest.set(parent);
+	protected synchronized void beforeClass() {
 	} 
 
 	@Parameters({"browserType"})
 	@BeforeMethod
-	public synchronized void beforeMethod(String browserType,Method method){
+	protected synchronized void beforeMethod(String browserType,Method method){
 		System.out.println("*********************** Start :" + method.getName() +" ***********************");
 		try {
 			setDriver(browserType);
@@ -93,36 +100,44 @@ public class PageTest {
 			System.out.println("Error....." + e.getStackTrace());
 		}
 		driver.navigate().to(appURL);
-		ExtentTest child = parentTest.get().createNode(method.getName());
-        test.set(child);
+		test = extent.startTest(method.getName())
+				.assignCategory(getClass().getSimpleName());
 	}
 
 	@AfterMethod
-	public synchronized void afterMethodd(ITestResult result) {
-		if (result.getStatus() == ITestResult.FAILURE)
-            test.get().fail(result.getThrowable());
-//			test.fail("details").addScreenCaptureFromPath("screenshot.png");
-        else if (result.getStatus() == ITestResult.SKIP)
-            test.get().skip(result.getThrowable());
-        else
-            test.get().pass("Test passed");
+	protected synchronized void afterMethodd(ITestResult result) {
+		if (result.getStatus() == ITestResult.FAILURE) {
+			test.log(LogStatus.FAIL, result.getThrowable());
+			test.log(LogStatus.FAIL, result.getThrowable() + screenShoot());
+		} 
 
-        extent.flush();
-		
-		if(ITestResult.FAILURE==result.getStatus()){
-			try{
-				System.out.println("Capture iamge and attach to report...");
-			}
-			catch (Exception e) {
-				System.out.println("Exception while taking screenshot "+e.getMessage());
-			}
-		}
+		extent.endTest(test);        
+		extent.flush();
 		driver.quit();
 	}
 
-		@AfterClass
-		public void tearDown() {
-//			driver.quit();
-		}
+	@AfterClass
+	protected void afterClass() {
+		//			driver.quit();
+	}
 
+	@AfterSuite
+	protected void afterSuite() {
+		extent.close();
+	}
+
+	public String screenShoot(){
+		String imgPath ="";
+		String imgName = DateTime.getCurrentTime("MM-dd-yyyy_HHmmss") + ".png";
+		try {
+			File scrnsht = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			File path=new File("").getAbsoluteFile();
+			String pathfile = path.toString() + "\\test-reports\\" + reportFolder + "\\images\\" + imgName;
+			FileUtils.copyFile(scrnsht, new File(pathfile));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		imgPath = test.addScreenCapture("./images/" + imgName);
+		return imgPath;
+	}
 }

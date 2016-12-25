@@ -37,18 +37,16 @@
 	<classpathentry kind="lib" path="libs/selenium-java-3.0.1/xml-apis-1.4.01.jar"/>
 	<classpathentry kind="lib" path="libs/TestNg/testng-6.9.9.jar"/>
 	<classpathentry kind="lib" path="libs/TestNg/jcommander-1.27.jar"/>
-	<classpathentry kind="lib" path="libs/extentreports-java-3.0.1/bsh-2.0b4.jar"/>
-	<classpathentry kind="lib" path="libs/extentreports-java-3.0.1/bson-3.3.0.jar"/>
-	<classpathentry kind="lib" path="libs/extentreports-java-3.0.1/commons-codec-1.9.jar"/>
-	<classpathentry kind="lib" path="libs/extentreports-java-3.0.1/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="libs/extentreports-java-3.0.1/extentreports-3.0.1.jar"/>
-	<classpathentry kind="lib" path="libs/extentreports-java-3.0.1/freemarker-2.3.23.jar"/>
-	<classpathentry kind="lib" path="libs/extentreports-java-3.0.1/httpclient-4.5.2.jar"/>
-	<classpathentry kind="lib" path="libs/extentreports-java-3.0.1/httpcore-4.4.4.jar"/>
-	<classpathentry kind="lib" path="libs/extentreports-java-3.0.1/httpmime-4.5.2.jar"/>
-	<classpathentry kind="lib" path="libs/extentreports-java-3.0.1/jcommander-1.48.jar"/>
-	<classpathentry kind="lib" path="libs/extentreports-java-3.0.1/jsoup-1.9.2.jar"/>
-	<classpathentry kind="lib" path="libs/extentreports-java-3.0.1/mongodb-driver-3.3.0.jar"/>
-	<classpathentry kind="lib" path="libs/extentreports-java-3.0.1/mongodb-driver-core-3.3.0.jar"/>
+	<classpathentry kind="lib" path="libs/extentreports-java-2.41.2/extentreports-2.41.2.jar"/>
+	<classpathentry kind="lib" path="libs/extentreports-java-2.41.2/freemarker-2.3.23.jar"/>
+	<classpathentry kind="lib" path="libs/poi-3.15/poi-3.15.jar"/>
+	<classpathentry kind="lib" path="libs/poi-3.15/poi-ooxml-3.15.jar"/>
+	<classpathentry kind="lib" path="libs/poi-3.15/xmlbeans-2.6.0.jar"/>
+	<classpathentry kind="lib" path="libs/poi-3.15/commons-collections4-4.1.jar"/>
+	<classpathentry kind="lib" path="libs/poi-3.15/commons-codec-1.10.jar"/>
+	<classpathentry kind="lib" path="libs/poi-3.15/curvesapi-1.04.jar"/>
+	<classpathentry kind="lib" path="libs/poi-3.15/poi-excelant-3.15.jar"/>
+	<classpathentry kind="lib" path="libs/poi-3.15/poi-ooxml-schemas-3.15.jar"/>
+	<classpathentry kind="lib" path="libs/poi-3.15/poi-scratchpad-3.15.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

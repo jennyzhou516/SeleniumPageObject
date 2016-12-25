@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Page Object test example">
+	<parameter name="browserType" value="firefox" />
+	<test name="Home page test">
+		<classes>
+			<class name="page.test.HomeTest" >
+				<methods>
+					<include name="verifyTitle"></include>
+				</methods>
+			</class>
+		</classes>
+	</test>
+</suite>
