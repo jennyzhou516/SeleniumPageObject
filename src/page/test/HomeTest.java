@@ -34,8 +34,8 @@ public class HomeTest extends PageTest {
         test.log(LogStatus.PASS, "Pass");
         test.log(LogStatus.PASS, "Pass");
         test.log(LogStatus.INFO, "Capture a image! " + screenShoot());
-        test.log(LogStatus.FAIL,"Failed......");
-        test.log(LogStatus.FAIL,"Failed......");
+        test.log(LogStatus.FAIL,"Failed.....");
+        test.log(LogStatus.FAIL,"Failed.....");
 		Assert.assertTrue(false, "hehehehehehe");
 	}
 	
