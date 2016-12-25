@@ -3,9 +3,9 @@
 	<parameter name="browserType" value="firefox" />
 	<test name="Home page test">
 		<classes>
-			<class name="page.test.HomeTest" >
+			<class name="page.test.SignUpTest" >
 				<methods>
-					<include name="verifyTitle"></include>
+					<include name="demoExcelTestData"></include>
 				</methods>
 			</class>
 		</classes>

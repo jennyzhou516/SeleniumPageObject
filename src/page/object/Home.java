@@ -11,6 +11,9 @@ public class Home extends PageObject{
 	@FindBy(xpath = ".//*[@id='lst-ib']")
 	public WebElement search_txt;
 	
+	@FindBy(xpath = ".//*[@id='gb_70' and @class='gb_Te gb_Ha gb_wb']")
+	public WebElement signUp_btn;
+	
 	
 	public Home(WebDriver driver){
 		super(driver);
