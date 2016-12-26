@@ -9,4 +9,6 @@ The project uses:
 # How to get and use the frame work
 1. Installation of Git support into Eclipse. Prefer to : http://www.vogella.com/tutorials/EclipseGit/article.html
 2. Install TestNG in Eclipse. Prefer to : http://toolsqa.com/selenium-webdriver/install-testng/
-3. Run test suite from TestNG
+3. Run test suite from TestNG :
+![alt tag](https://github.com/yoyo13189/SeleniumPageObject/blob/master/images/runTestNG.png)
+
