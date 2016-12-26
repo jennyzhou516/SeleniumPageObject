@@ -13,6 +13,6 @@ The project uses:
 
 ![alt tag](https://github.com/yoyo13189/SeleniumPageObject/blob/master/images/runTestNG.png)
 
-4. I can find extent report into <b>test-reports<b/> direction
+4. You can find extent report into <b>test-reports<b/> direction
 
 ![alt tag](https://github.com/yoyo13189/SeleniumPageObject/blob/master/images/extentReport.png)
