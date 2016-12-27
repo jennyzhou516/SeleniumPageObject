@@ -76,6 +76,7 @@ public class Excel {
 		return listData;
 	} 
 	
+	@SuppressWarnings("deprecation")
 	private static String convertCell(Cell c){
 		String result ="";
 		if (c == null || c.getCellTypeEnum()== CellType.BLANK){
