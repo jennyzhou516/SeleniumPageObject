@@ -40,6 +40,7 @@ public class SignUpTest extends PageTest {
 			signUPPage.inputData(listData.get(i));
 			test.log(LogStatus.INFO, "Screent Shoot after input data" + screenShoot());
 //			signUPPage.nextStep.click();
+			signUPPage.sleep(3);
 			driver.navigate().to("https://accounts.google.com/SignUp");
 		}
 		
