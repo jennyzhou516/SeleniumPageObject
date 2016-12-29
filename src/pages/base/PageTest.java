@@ -62,7 +62,7 @@ public class PageTest {
 	private static WebDriver initChromeDriver(String appURL){
 
 		System.out.println("Launching google chrome with new profile..");
-		System.setProperty("webdriver.chrome.driver", driverPath + "chromedriver_win.exe");
+		System.setProperty("webdriver.chrome.driver", driverPath + "/chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		return driver;
@@ -70,7 +70,7 @@ public class PageTest {
 
 	private static WebDriver initFirefoxDriver(String appURL){
 		System.out.println("Launching Firefox browser..");
-		System.setProperty("webdriver.firefox.marionette", driverPath + "geckodriver_win64.exe");
+		System.setProperty("webdriver.firefox.marionette", driverPath + "/geckodriver_win64.exe");
 		WebDriver driver = new FirefoxDriver();
 		driver.manage().window().maximize();
 		return driver;
