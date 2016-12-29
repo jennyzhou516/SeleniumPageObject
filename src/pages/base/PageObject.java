@@ -34,13 +34,8 @@ public class PageObject {
 	
 	public String dropDownListDivWithName(WebElement openList,List<WebElement> list,String name){
 		openList.click();
-		System.out.println("Size of drop down list: " + list.size());
-		for(int i=0; i<list.size();i++){
-			System.out.println("item on list "+ i + ": " + list.get(i).getText());
-		}
 		for(int i=0; i<list.size();i++){
 			if(list.get(i).getText().equals(name)){
-				System.out.println("Select item: " + name);
 				list.get(i).click();
 				break;
 			}

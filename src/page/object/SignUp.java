@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
 import pages.base.PageObject;
 
@@ -54,6 +53,9 @@ public class SignUp extends PageObject {
 
 	@FindBy(id="RecoveryPhoneNumber")
 	public WebElement recoveryPhoneNumber;
+	
+	@FindBy(id="RecoveryEmailAddress")
+	public WebElement recoveryEmailAddress;
 
 	@FindBy(xpath=".//*[@id='CountryCode']/div")
 	public WebElement countryCode;
@@ -99,9 +101,6 @@ public class SignUp extends PageObject {
 	// Define methods ****************************************************
 	public void langChooser(String lang){
 		dropDownListSelectValue(langChooser,"en");
-//		firstName.sendKeys("fist name");
-//		lastName.sendKeys("last name");
-//		gmailAddress.sendKeys("thohip12345678");
 		System.out.println("Select month: " + dropDownListDivWithName(birthMonth, birthMonthList, "January"));
 		System.out.println("Select gender: " + dropDownListDivWithName(gender, genderList, "Female"));
 		recoveryPhoneNumber.sendKeys("123456");
@@ -117,13 +116,14 @@ public class SignUp extends PageObject {
 		passwdAgain.sendKeys(fieldData.get("PasswdConfirm"));
 		if (fieldData.get("BirthMonth")!=""){
 			dropDownListDivWithName(birthMonth, birthMonthList, fieldData.get("BirthMonth"));
-			sleep(3);
 		}
 		birthDay.sendKeys(fieldData.get("BirthDay"));
 		birthYear.sendKeys(fieldData.get("BirthYear"));
 		if(fieldData.get("Gender")!=""){
 			dropDownListDivWithName(gender, genderList, fieldData.get("Gender"));
-			sleep(3);
 		}
+		recoveryPhoneNumber.sendKeys(fieldData.get("PhoneNumber"));
+		recoveryEmailAddress.sendKeys(fieldData.get("CurrentEmail"));
+		
 	}
 }

@@ -32,13 +32,14 @@ public class SignUpTest extends PageTest {
 //		signUPPage.langChooser("English (United States)");
 		List<HashMap<String,String>> listData = new ArrayList<HashMap<String,String>>();
 		listData =  Excel.readXSLXFile("test-data/CreateAcount.xlsx", "InvalidData");
+		
 		for(int i = 0; i< listData.size();i++){
+			test.log(LogStatus.INFO, "**********************************************************************************");
 			test.log(LogStatus.INFO, "Verify for case : " + listData.get(i).get("Description"));
 			System.out.println("Verify for case : " + listData.get(i).get("Description"));
 			signUPPage.inputData(listData.get(i));
-			signUPPage.nextStep.click();
-			signUPPage.sleep(5);
 			test.log(LogStatus.INFO, "Screent Shoot after input data" + screenShoot());
+//			signUPPage.nextStep.click();
 			driver.navigate().to("https://accounts.google.com/SignUp");
 		}
 		
