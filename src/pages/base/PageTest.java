@@ -151,4 +151,20 @@ public class PageTest {
 			test.log(LogStatus.FAIL, dec + " " + " was verify failed. Expected: "+ text+ " - Actual: "+ wel.getText() + screenShoot());
 		}
 	}
+	
+	public void elementTextContain(String dec,WebElement wel,String text){
+		if(wel.getText().contains(text)){
+			test.log(LogStatus.PASS, dec + " " + " was verify passed");
+		}else{
+			test.log(LogStatus.FAIL, dec + " " + " was verify failed. Expected: "+ text+ " - Actual: "+ wel.getText() + screenShoot());
+		}
+	}
+	
+	public void elementTextMatches(String dec,WebElement wel,String regex){
+		if(wel.getText().matches(regex)){
+			test.log(LogStatus.PASS, dec + " " + " was verify passed");
+		}else{
+			test.log(LogStatus.FAIL, dec + " " + " was verify failed. Expected: "+ regex+ " - Actual: "+ wel.getText() + screenShoot());
+		}
+	}
 }
