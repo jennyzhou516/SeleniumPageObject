@@ -18,33 +18,47 @@ import utilites.Excel;
 public class SignUpTest extends PageTest {
 	private WebDriver driver;
 	private SignUp signUPPage ;
-	
+
 	@BeforeMethod
 	public void setUp() {
 		driver=getDriver();
 		driver.navigate().to("https://accounts.google.com/SignUp");
 		signUPPage=new SignUp(driver);
 	}
-	
+
 	@Test
 	public void demoExcelTestData(){
 		test.log(LogStatus.INFO, "Verify create account with invalid data field");
-//		signUPPage.langChooser("English (United States)");
+		//		signUPPage.langChooser("English (United States)");
 		List<HashMap<String,String>> listData = new ArrayList<HashMap<String,String>>();
 		listData =  Excel.readXSLXFile("test-data/CreateAcount.xlsx", "InvalidData");
-		
+
 		for(int i = 0; i< listData.size();i++){
 			test.log(LogStatus.INFO, "**********************************************************************************");
 			test.log(LogStatus.INFO, "Verify for case : " + listData.get(i).get("Description"));
 			System.out.println("Verify for case : " + listData.get(i).get("Description"));
 			signUPPage.inputData(listData.get(i));
 			test.log(LogStatus.INFO, "Screent Shoot after input data" + screenShoot());
-//			signUPPage.nextStep.click();
+			//			signUPPage.nextStep.click();
 			signUPPage.sleep(3);
+			verifyMessageError(listData.get(i));
 			driver.navigate().to("https://accounts.google.com/SignUp");
 		}
-		
+
 	}
-	
+
+	private void verifyMessageError(HashMap<String,String> fieldData){
+		if(fieldData.get("LastNameMesEr")!=""){
+			elementTextEqual("Last Name message error",signUPPage.errormsg_LastName,fieldData.get("LastNameMesEr"));
+		}else{
+			if(fieldData.get("FirstNameMesEr")!=""){
+				elementTextEqual("First Name message error",signUPPage.errormsg_FirstName,fieldData.get("FirstNameMesEr"));
+			}
+		}
+		if(fieldData.get("UserNameMesEr")!=""){
+			elementTextEqual("User name message error", signUPPage.errormsg_GmailAddress, fieldData.get("UserNameMesEr"));
+		}
+	}
+
 
 }

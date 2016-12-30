@@ -8,6 +8,7 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestResult;
@@ -125,7 +126,9 @@ public class PageTest {
 	protected void afterSuite() {
 		extent.close();
 	}
-
+	
+	//Methods for test report ***********************************************
+	
 	public String screenShoot(){
 		String imgPath ="";
 		String imgName = DateTime.getCurrentTime("MM-dd-yyyy_HHmmss") + ".png";
@@ -139,5 +142,13 @@ public class PageTest {
 		}
 		imgPath = test.addScreenCapture("./images/" + imgName);
 		return imgPath;
+	}
+	
+	public void elementTextEqual(String dec,WebElement wel,String text){
+		if(wel.getText().equals(text)){
+			test.log(LogStatus.PASS, dec + " " + " was verify passed");
+		}else{
+			test.log(LogStatus.FAIL, dec + " " + " was verify failed. Expected: "+ text+ " - Actual: "+ wel.getText() + screenShoot());
+		}
 	}
 }

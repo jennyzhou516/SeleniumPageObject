@@ -61,7 +61,7 @@ public class Excel {
 
 				{
 					Cell dataCell = data.getCell(j);
-					hmData.put(rowFields.getCell(j).toString(),convertCell(dataCell));
+					hmData.put(rowFields.getCell(j).toString().trim(),convertCell(dataCell));
 				}
 
 				listData.add(hmData);
@@ -82,7 +82,7 @@ public class Excel {
 		if (c == null || c.getCellTypeEnum()== CellType.BLANK){
 			result ="";
 		}else{
-			result = c.toString();
+			result = c.toString().trim();
 		}
 			
 		return result;
