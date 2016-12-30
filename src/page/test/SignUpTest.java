@@ -7,6 +7,7 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -45,6 +46,23 @@ public class SignUpTest extends PageTest {
 			driver.navigate().to("https://accounts.google.com/SignUp");
 		}
 
+	}
+	
+	@Test(dataProvider="demoExcelDataproviderGetData")
+	public void demoExcelDataprovider(HashMap<String,String> dataRow ){
+		test.log(LogStatus.INFO, "**********************************************************************************");
+		test.log(LogStatus.INFO, "Verify for case : " + dataRow.get("Description"));
+		System.out.println("Verify for case : " + dataRow.get("Description"));
+		signUPPage.inputData(dataRow);
+		test.log(LogStatus.INFO, "Screent Shoot after input data" + screenShoot());
+		signUPPage.sleep(3);
+		verifyMessageError(dataRow);
+	}
+	
+	@DataProvider
+	public static Object[][] demoExcelDataproviderGetData(){
+		Object[][] obj = Excel.readXSLXFileDataProvider("test-data/CreateAcount.xlsx", "InvalidData");
+		return obj;
 	}
 
 	private void verifyMessageError(HashMap<String,String> fieldData){

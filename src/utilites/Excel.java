@@ -74,7 +74,39 @@ public class Excel {
 		}
 
 		return listData;
-	} 
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static Object[][] readXSLXFileDataProvider(String filePath,String sheetName){
+		HashMap<String,String>[][] listData = null ;
+		try{
+			FileInputStream myInput = new FileInputStream(new File(filePath));
+			Workbook workBook = WorkbookFactory.create(myInput);
+			Sheet sheet = workBook.getSheet(sheetName);
+			listData = new HashMap[sheet.getLastRowNum()][1];
+			for ( int i = 1 ; i <= sheet.getLastRowNum() ; i++ )
+			{
+				Row rowFields = sheet.getRow(0);
+				Row data = sheet.getRow(i);
+				if (data==null || data.getLastCellNum() <= 0) continue;
+				HashMap<String,String> hmData = new HashMap<>();
+
+				for( int j = 0 ; j < rowFields.getLastCellNum() ; j++ )
+
+				{
+					Cell dataCell = data.getCell(j);
+					hmData.put(rowFields.getCell(j).toString().trim(),convertCell(dataCell));
+				}
+
+				listData[i-1][0]=hmData;
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return listData;
+	}
 	
 	@SuppressWarnings("deprecation")
 	private static String convertCell(Cell c){
