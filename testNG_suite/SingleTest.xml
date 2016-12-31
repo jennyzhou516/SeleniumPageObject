@@ -3,9 +3,9 @@
 	<parameter name="browserType" value="chrome" />
 	<test name="Home page test">
 		<classes>
-			<class name="page.test.SignUpTest" >
+			<class name="page.test.HomeTest" >
 				<methods>
-					<include name="demoExcelDataprovider"></include>
+					<include name="orderProduct"></include>
 				</methods>
 			</class>
 		</classes>

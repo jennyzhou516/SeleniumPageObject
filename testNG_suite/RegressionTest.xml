@@ -4,7 +4,6 @@
 	<test name="Home page test">
 		<classes>
 			<class name="page.test.HomeTest" />
-			<class name="page.test.SignUpTest" />
 		</classes>
 	</test>
 </suite>

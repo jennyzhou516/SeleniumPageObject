@@ -31,7 +31,7 @@ import utilites.FolderFile;
 public class PageTest {
 	private  WebDriver driver;
 	private static String driverPath = "./web-driver";
-	private static String appURL = "https://www.google.com.vn/";
+	private static String appURL = "http://tranminhthanh.info/training/selenium/VirtualMart/";
 
 	private static ExtentReports extent;
 	protected ExtentTest test;
