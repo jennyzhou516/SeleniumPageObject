@@ -60,6 +60,15 @@ public class PageObject {
 	}
 
 	// Drop down list support
+	public void dropDownListSelectText(WebElement select,String text){
+		Select sl= new Select(select);
+		sl.selectByIndex(2);
+		List<WebElement> options = sl.getOptions();
+		for (WebElement option : options) {
+		    System.out.println("Option name: " + option.getText());
+		}
+	}
+	
 	public void dropDownListSelectIndex(WebElement select,int index){
 		Select sl= new Select(select);
 		sl.selectByIndex(index);

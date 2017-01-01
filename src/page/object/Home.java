@@ -25,8 +25,18 @@ public class Home extends PageObject{
 		return driver.findElement(By.xpath(xpt));
 	}
 	
-	public WebElement quantityProduct_txt(String nameProduct){
-		String xpt=". //*[text()='" + nameProduct + "']/ancestor::div[@class='spacer product-container']//*[@class='quantity-input js-recalculate']";
+	public WebElement quantityProduct_input(String productName){
+		String xpt=". //*[text()='" + productName + "']/ancestor::div[@class='spacer product-container']//*[@class='quantity-input js-recalculate']";
+		return driver.findElement(By.xpath(xpt));
+	}
+	
+	public WebElement addToCart_button(String productName){
+		String xpt=". //*[text()='" + productName + "']/ancestor::div[@class='spacer product-container']//input[@class='addtocart-button']";
+		return driver.findElement(By.xpath(xpt));
+	}
+	
+	public WebElement sizeProduct_select(String productName){
+		String xpt=". //*[text()='" + productName + "']/ancestor::div[@class='spacer product-container']//*[@class='product-field product-field-type-S'][1]//select[@class='vm-chzn-select chzn-done']";
 		return driver.findElement(By.xpath(xpt));
 	}
 }

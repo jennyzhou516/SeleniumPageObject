@@ -28,8 +28,11 @@ public class HomeTest extends PageTest {
 		homeObject.productCategory("Headpiece").click();
 		homeObject.waitVisibleElement(homeObject.categoryHeader("Headpiece"), 30);
 		homeObject.focus(homeObject.categoryHeader("Headpiece"));
-		homeObject.quantityProduct_txt("Cowboy Hat").clear();
-		homeObject.quantityProduct_txt("Cowboy Hat").sendKeys("10");;
+		homeObject.quantityProduct_input("Cowboy Hat").clear();
+		homeObject.quantityProduct_input("Cowboy Hat").sendKeys("10");
+		homeObject.sleep(5);
+//		homeObject.dropDownListSelectText(homeObject.sizeProduct_select("Cowboy Hat"), "Size: XL No additional charge");
+		homeObject.dropDownListSelectIndex(homeObject.sizeProduct_select("Cowboy Hat"), 1);
 		homeObject.sleep(5);
 		test.log(LogStatus.PASS, "Order number of product:" + screenShoot());
 	}
