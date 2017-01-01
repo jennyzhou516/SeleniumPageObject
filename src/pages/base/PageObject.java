@@ -2,6 +2,7 @@ package pages.base;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -33,19 +34,37 @@ public class PageObject {
 		return new WebDriverWait(driver, time);
 	}
 
-	public void waitVisibleElement(WebElement we, int time) {
+	public void waitElementVisible(WebElement we, int time) {
 		WebDriverWait wa = initWait(time);
 		wa.until(ExpectedConditions.visibilityOf(we));
 	}
 
-	public void waitInvisibleElement(By by, int time) {
+	public void waitElementInvisible(By by, int time) {
 		WebDriverWait wa = initWait(time);
 		wa.until(ExpectedConditions.invisibilityOfElementLocated(by));
 	}
 
-	public void waitVisibleListElements(ArrayList<WebElement> we, int time) {
+	public void waitListElementVisible(ArrayList<WebElement> we, int time) {
 		WebDriverWait wa = initWait(time);
 		wa.until(ExpectedConditions.visibilityOfAllElements(we));
+	}
+	
+	public void waitElementClickable(WebElement we, int time) {
+		WebDriverWait wa = initWait(time);
+		wa.until(ExpectedConditions.elementToBeClickable(we));
+	}
+	
+	public void clickUtilClickable(WebElement we, int time){
+		waitElementClickable(we,time);
+		int timeout =0;
+		while(timeout<=time){
+			try {
+				we.click();
+				break;
+			} catch (Exception e) {
+				timeout+=1;
+			}
+		}
 	}
 
 	// Focus a element
@@ -62,10 +81,11 @@ public class PageObject {
 	// Drop down list support
 	public void dropDownListSelectText(WebElement select,String text){
 		Select sl= new Select(select);
-		sl.selectByIndex(2);
 		List<WebElement> options = sl.getOptions();
 		for (WebElement option : options) {
-		    System.out.println("Option name: " + option.getText());
+			if (option.getText().equalsIgnoreCase(text)) {
+		        option.click();
+		    }
 		}
 	}
 	
@@ -88,6 +108,16 @@ public class PageObject {
 			}
 		}
 		return openList.getText();
+	}
+	
+	// Handle popup
+	public void switchBrowserPopup(String mainWindow){
+		Set<String> setWindow = driver.getWindowHandles();
+		for (String window : setWindow){
+			if(!window.equalsIgnoreCase(mainWindow)){
+				driver.switchTo().window(window);
+			} 
+		}
 	}
 
 }
