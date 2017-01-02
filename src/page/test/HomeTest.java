@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import page.object.Cart;
 import page.object.Home;
 import page.object.PopupCart;
 import pages.base.PageTest;
@@ -19,13 +20,15 @@ public class HomeTest extends PageTest {
 	private WebDriver driver;
 	private Home homeObject;
 	private PopupCart popupCart;
+	private Cart cart;
 
 	@BeforeMethod
 	public void setUp(){
 		driver=getDriver();
 		homeObject= new Home(driver);
 		popupCart = new PopupCart(driver);
-	}
+		cart = new Cart(driver);
+ 	}
 
 	/*
 	 Verify order a product with guest user is successfully
@@ -34,14 +37,25 @@ public class HomeTest extends PageTest {
 	public void orderProduct(){
 		List<HashMap<String,String>> listData = new ArrayList<HashMap<String,String>>();
 		listData= Excel.readXSLXFile("test-data/Product.xlsx", "AddProduct");
-
+		
+		// Order products
+		test.log(LogStatus.INFO, "Step 1 : Order products ***************************************");
 		for(int i=0; i<listData.size(); i++){
 			selectCategory(listData.get(i).get("Category"));
 			addProductAndVerify(listData.get(i));
 			homeObject.clickUtilClickable(popupCart.closeWindow, 30);
 			if(i<listData.size()-1) homeObject.clickUtilClickable(homeObject.home_link, 30);
 		}
-		homeObject.sleep(10);
+		
+		//Check out order
+		homeObject.clickUtilClickable(homeObject.cart_link,30);
+		cart.waitElementClickable(cart.checkOut_button, 30);
+		
+		test.log(LogStatus.INFO, "Step 2 : Verify products on cart ***************************************");
+		cart.verifyProductOrder(listData,test);
+//		CartTest cartTest = new CartTest();
+//		cartTest.verifyProductOrder(listData,driver);
+		test.log(LogStatus.INFO, "List product order" + screenShoot());
 	}
 
 	public void selectCategory(String category){
