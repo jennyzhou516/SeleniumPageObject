@@ -67,6 +67,10 @@ public class Home extends PageObject{
 
 	public void addProduct(HashMap<String,String> hsm){
 		inputQuantityProduct(hsm.get("ProductName"), hsm.get("Quantity"));
-		selectSizeProduct(hsm.get("ProductName"), hsm.get("Size"));
+		try {
+			selectSizeProduct(hsm.get("ProductName"), hsm.get("Size"));
+		} catch (Exception e) {
+			// TODO: handle exception
+		}	
 	}
 }

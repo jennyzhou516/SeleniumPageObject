@@ -29,7 +29,6 @@ public class PageObject {
 	}
 
 	// Explicit wait time
-	// Wait time
 	private WebDriverWait initWait(int time) {
 		return new WebDriverWait(driver, time);
 	}
@@ -54,6 +53,12 @@ public class PageObject {
 		wa.until(ExpectedConditions.elementToBeClickable(we));
 	}
 	
+	public void waitElementPresence(By by, int time) {
+		WebDriverWait wa = initWait(time);
+		wa.until(ExpectedConditions.presenceOfElementLocated(by));
+	}
+	
+	// Element action
 	public void clickUtilClickable(WebElement we, int time){
 		waitElementClickable(we,time);
 		int timeout =0;
