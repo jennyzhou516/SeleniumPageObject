@@ -1,6 +1,5 @@
 package page.object;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -8,8 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import pages.base.PageObject;
 
 public class PopupCart extends PageObject{
-	public PopupCart(WebDriver driver){
-		super(driver);
+	public PopupCart(){
 		PageFactory.initElements(driver, this);
 	}
 

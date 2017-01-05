@@ -3,7 +3,6 @@ package page.object;
 import java.util.HashMap;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -18,8 +17,7 @@ public class Home extends PageObject{
 	@FindBy(xpath=".//*[@id='menuwrapper']//a[text()='Cart']")
 	public WebElement cart_link;
 
-	public Home(WebDriver driver){
-		super(driver);
+	public Home(){
 		PageFactory.initElements(driver, this);
 	}
 

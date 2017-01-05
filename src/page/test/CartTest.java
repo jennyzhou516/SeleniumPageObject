@@ -3,7 +3,6 @@ package page.test;
 import java.util.HashMap;
 import java.util.List;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 
@@ -13,24 +12,21 @@ import page.object.Cart;
 import pages.base.PageTest;
 
 public class CartTest extends PageTest {
-	private WebDriver driver;
 	private Cart cart;
 	
-	
+	public void initialPageObject(){
+		cart = new Cart();
+	}
 	
 	@BeforeMethod
-	public void setUP(){
-		driver = getDriver();
-		cart = new Cart(driver);
+	public void beforeMethod(){
+		initialPageObject();
 	}
 	
-	public void setUP1(WebDriver driver){
-		this.driver = driver;
-		cart = new Cart(driver);
+	public CartTest(){
+		initialPageObject();
 	}
-	
-	public void verifyProductOrder(List<HashMap<String,String>> productInfo, WebDriver driver){
-		setUP1(driver);
+	public void verifyProductOrder(List<HashMap<String,String>> productInfo){
 		List<WebElement> listProducName = cart.listProductName();
 		if(productInfo.size()==listProducName.size()){
 			test.log(LogStatus.PASS, "Number of products display corretcly.");
@@ -39,7 +35,7 @@ public class CartTest extends PageTest {
 		}
 		
 		for(int i=0; i<productInfo.size(); i++){
-			if(cart.productQuantity(productInfo.get(i).get("ProductName")).getText().equals(productInfo.get(i).get("Quantity"))){
+			if(cart.productQuantity(productInfo.get(i).get("ProductName")).getAttribute("value").equals(productInfo.get(i).get("Quantity"))){
 				test.log(LogStatus.PASS, "Verify product name and product quantity for product \"" 
 						+ productInfo.get(i).get("ProductName") + "\" is PASSED");
 			}else{

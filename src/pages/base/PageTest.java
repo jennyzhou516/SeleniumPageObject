@@ -29,12 +29,12 @@ import utilites.FolderFile;
 
 
 public class PageTest {
-	private  WebDriver driver;
+	public static  WebDriver driver;
 	private static String driverPath = "./web-driver";
 	private static String appURL = "http://tranminhthanh.info/training/selenium/VirtualMart/";
 
 	private static ExtentReports extent;
-	protected ExtentTest test;
+	public static ExtentTest test;
 
 	private static String reportFolder="";
 

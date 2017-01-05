@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -18,19 +16,26 @@ import pages.base.PageTest;
 import utilites.Excel;
 
 public class HomeTest extends PageTest {
-	private WebDriver driver;
+	
 	private Home homeObject;
 	private PopupCart popupCart;
 	private Cart cart;
-
-	@BeforeMethod
-	public void setUp(){
-		driver=getDriver();
-		homeObject= new Home(driver);
-		popupCart = new PopupCart(driver);
-		cart = new Cart(driver);
+	private OrdersTest ordersTest;
+	
+	public void initialPageObject(){
+		homeObject= new Home();
+		popupCart = new PopupCart();
+		cart = new Cart();
+		ordersTest= new OrdersTest();
  	}
-
+	@BeforeMethod
+	public void beforeMethod(){
+		initialPageObject();
+ 	}
+	
+	public HomeTest() {
+		initialPageObject();
+	}
 	/*
 	 Verify order a product with guest user is successfully
 	 */
@@ -53,19 +58,24 @@ public class HomeTest extends PageTest {
 		cart.waitElementClickable(cart.checkOut_button, 30);
 		
 		test.log(LogStatus.INFO, "Step 2 : Verify products on cart ***************************************");
-		cart.verifyProductOrder(listData,test);
-//		CartTest cartTest = new CartTest();
-//		cartTest.verifyProductOrder(listData,driver);
-		test.log(LogStatus.INFO, "List product order" + screenShoot());
-		test.log(LogStatus.INFO, "Step 2 : Check out cart with guest user ***************************************");
+
+		CartTest cartTest = new CartTest();
+		cartTest.verifyProductOrder(listData);
+		
+		test.log(LogStatus.INFO, "Step 3 : Check out cart with guest user ***************************************");
 		cart.clickUtilClickable(cart.checkOut_button, 30);
 		cart.waitElementVisible(cart.checkOutGuest, 30);
 		List<HashMap<String,String>> listGuestInfo = Excel.readXSLXFile("test-data/Product.xlsx", "GuestUser");
 		cart.inputGuestInfo(listGuestInfo.get(0));
-		cart.clickUtilClickable(cart.checkOutGuest, 30);;
-		cart.termsOfService.click();
+		cart.clickUtilClickable(cart.checkOutGuest, 30);
 		verifyBillToOfGuestUser(listGuestInfo.get(0));
-		cart.sleep(10);
+		cart.termsOfService.click();
+		cart.clickUtilClickable(cart.checkOut_button, 30);
+		cart.clickUtilClickable(cart.viewOrder, 30);
+		
+		test.log(LogStatus.INFO, "Step 4 : Verify order information ***************************************");
+		ordersTest.verifyBillToAndShipToInfo(listGuestInfo.get(0));
+		cart.sleep(5);
 	}
 
 	public void selectCategory(String category){
@@ -77,7 +87,7 @@ public class HomeTest extends PageTest {
 
 	public void addProductAndVerify(HashMap<String,String> productData){
 		homeObject.addProduct(productData);
-		test.log(LogStatus.PASS, "Information of ordering-product: " + screenShoot());
+		test.log(LogStatus.PASS, "Information of ordering-product: " + productData.get("ProductName") + screenShoot());
 		homeObject.addToCart_button(productData.get("ProductName")).click();
 		vefiryProductInfoOnCartPopUp(productData.get("ProductName"),productData.get("Quantity"));
 	}
@@ -105,7 +115,9 @@ public class HomeTest extends PageTest {
 		elementTextEqual("Company", cart.billCompanyName, guestInfo.get("CompanyName"));
 		elementTextEqual("Title", cart.billTitle, guestInfo.get("Title"));
 		elementTextEqual("First Name", cart.billFirstName, guestInfo.get("FirstName"));
-//		elementTextEqual("Middle Name", cart.billMiddleName, guestInfo.get("MiddleName"));
+		if(guestInfo.get("MiddleName")!=""){
+			elementTextEqual("Middle Name", cart.billMiddleName, guestInfo.get("MiddleName"));
+		}	
 		elementTextEqual("Last Name", cart.billLastName, guestInfo.get("LastName"));
 		elementTextEqual("Address1", cart.billAddress1, guestInfo.get("Address1"));
 		elementTextEqual("Address2", cart.billAddress2, guestInfo.get("Address2"));
@@ -114,6 +126,7 @@ public class HomeTest extends PageTest {
 		elementTextEqual("Phone", cart.billPhone, guestInfo.get("Phone"));
 		elementTextEqual("Mobile Phone", cart.billMobilePhone, guestInfo.get("MobilePhone"));
 		elementTextEqual("Fax", cart.billFax, guestInfo.get("Fax"));
+		test.log(LogStatus.INFO, "Bill to infomation" + screenShoot());
 		
 	}
 }

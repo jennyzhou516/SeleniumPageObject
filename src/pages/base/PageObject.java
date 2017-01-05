@@ -12,12 +12,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class PageObject {
-	protected WebDriver driver;
+import com.relevantcodes.extentreports.ExtentTest;
 
-	public PageObject(WebDriver driver){
-		this.driver = driver;
-	}
+public class PageObject {
+	public WebDriver driver = PageTest.driver;
+	public ExtentTest test = PageTest.test;
 
 	public void sleep(int time){
 		try{
