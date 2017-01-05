@@ -57,7 +57,6 @@ public class HomeTest extends PageTest {
 //		CartTest cartTest = new CartTest();
 //		cartTest.verifyProductOrder(listData,driver);
 		test.log(LogStatus.INFO, "List product order" + screenShoot());
-		
 		test.log(LogStatus.INFO, "Step 2 : Check out cart with guest user ***************************************");
 		cart.clickUtilClickable(cart.checkOut_button, 30);
 		cart.waitElementVisible(cart.checkOutGuest, 30);
