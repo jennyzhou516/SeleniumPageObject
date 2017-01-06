@@ -67,6 +67,9 @@ public class Cart extends PageObject{
 		return driver.findElement(By.xpath(xpt));
 	}
 	
+	@FindBy(xpath=".//*[@class='billto-shipto']")
+	public WebElement billShipTo_SS;
+	
 	@FindBy(id="first_name_field")
 	public WebElement firstName;
 	

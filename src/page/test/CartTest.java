@@ -26,6 +26,7 @@ public class CartTest extends PageTest {
 	public CartTest(){
 		initialPageObject();
 	}
+	
 	public void verifyProductOrder(List<HashMap<String,String>> productInfo){
 		List<WebElement> listProducName = cart.listProductName();
 		if(productInfo.size()==listProducName.size()){

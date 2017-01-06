@@ -66,8 +66,27 @@ public class PageObject {
 				we.click();
 				break;
 			} catch (Exception e) {
+				sleep(1);
 				timeout+=1;
 			}
+		}
+	}
+	
+	public boolean elementEndabled(WebElement we){
+		try {
+			return we.isEnabled();
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	public void clickUtilInvisible(WebElement we, int time){
+		int i=1;
+		while(elementEndabled(we)){
+			clickUtilClickable(we,time);
+			sleep(1);
+			i++;
+			if(i>time) break;
 		}
 	}
 
@@ -114,7 +133,7 @@ public class PageObject {
 		return openList.getText();
 	}
 	
-	// Handle popup
+	// Handle pop up
 	public void switchBrowserPopup(String mainWindow){
 		Set<String> setWindow = driver.getWindowHandles();
 		for (String window : setWindow){

@@ -30,7 +30,12 @@ public class Home extends PageObject{
 		String xpt=".//*[@class='browse-view']/h1[text()='" + name + "']";
 		return driver.findElement(By.xpath(xpt));
 	}
-
+	
+	public WebElement product_SS(String productName){
+		String xpt=". //*[text()='" + productName + "']/ancestor::div[@class='spacer product-container']";
+		return driver.findElement(By.xpath(xpt));
+	}
+	
 	public WebElement quantityProduct_input(String productName){
 		String xpt=". //*[text()='" + productName + "']/ancestor::div[@class='spacer product-container']//*[@class='quantity-input js-recalculate']";
 		return driver.findElement(By.xpath(xpt));

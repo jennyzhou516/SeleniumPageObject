@@ -1,5 +1,6 @@
 package pages.base;
 
+
 import java.io.File;
 import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
@@ -20,6 +21,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
+import com.assertthat.selenium_shutterbug.core.ElementSnapshot;
+import com.assertthat.selenium_shutterbug.core.PageSnapshot;
+import com.assertthat.selenium_shutterbug.core.Shutterbug;
+import com.assertthat.selenium_shutterbug.utils.web.ScrollStrategy;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
@@ -30,6 +35,7 @@ import utilites.FolderFile;
 
 public class PageTest {
 	public static  WebDriver driver;
+	public static  String browser;
 	private static String driverPath = "./web-driver";
 	private static String appURL = "http://tranminhthanh.info/training/selenium/VirtualMart/";
 
@@ -45,6 +51,7 @@ public class PageTest {
 	}
 
 	private void setDriver(String browserType){
+		browser = browserType;
 		switch(browserType){
 		case "chrome":
 			driver=initChromeDriver(appURL);
@@ -126,9 +133,9 @@ public class PageTest {
 	protected void afterSuite() {
 		extent.close();
 	}
-	
+
 	//Methods for test report ***********************************************
-	
+
 	public String screenShoot(){
 		String imgPath ="";
 		String imgName = DateTime.getCurrentTime("MM-dd-yyyy_HHmmss") + ".png";
@@ -144,6 +151,65 @@ public class PageTest {
 		return imgPath;
 	}
 	
+	public String shuttlePage(){
+		if(browser.equals("firefox")){
+			return screenShoot();
+		}
+		String imgPath ="";
+		String imgName = DateTime.getCurrentTime("MM-dd-yyyy_HHmmss");
+		try {
+			File path=new File("").getAbsoluteFile();
+			String pathfile = path.toString() + "\\test-reports\\" + reportFolder + "\\images\\";
+			PageSnapshot pss = Shutterbug.shootPage(driver,ScrollStrategy.BOTH_DIRECTIONS);
+			pss.withName(imgName);
+			pss.save(pathfile);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		imgPath = test.addScreenCapture("./images/" + imgName+".png");
+		return imgPath;
+	}
+	
+	public String shuttlePageElement(WebElement wel){
+		if(browser.equals("firefox")){
+			return screenShoot();
+		}
+		String imgPath ="";
+		String imgName = DateTime.getCurrentTime("MM-dd-yyyy_HHmmss");
+		try {
+			File path=new File("").getAbsoluteFile();
+			String pathfile = path.toString() + "\\test-reports\\" + reportFolder + "\\images\\";
+			PageSnapshot pss = Shutterbug.shootPage(driver,ScrollStrategy.BOTH_DIRECTIONS);
+			pss.withName(imgName);
+			pss.highlight(wel);
+			pss.save(pathfile);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		imgPath = test.addScreenCapture("./images/" + imgName+".png");
+		return imgPath;
+	}
+	
+	public String shuttleElement(WebElement wel){
+		if(browser.equals("firefox")){
+			return screenShoot();
+		}
+		String imgPath ="";
+		String imgName = DateTime.getCurrentTime("MM-dd-yyyy_HHmmss");
+		try {
+			File path=new File("").getAbsoluteFile();
+			String pathfile = path.toString() + "\\test-reports\\" + reportFolder + "\\images\\";
+			ElementSnapshot pss = Shutterbug.shootElement(driver,wel);
+			pss.withName(imgName);
+			pss.save(pathfile);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		imgPath = test.addScreenCapture("./images/" + imgName+".png");
+		return imgPath;
+	}
+
+
 	public void elementTextEqual(String dec,WebElement wel,String text){
 		if(wel.getText().equals(text)){
 			test.log(LogStatus.PASS, dec + " " + " was verify passed");
@@ -151,7 +217,7 @@ public class PageTest {
 			test.log(LogStatus.FAIL, dec + " " + " was verify failed. Expected: "+ text+ " - Actual: "+ wel.getText() + screenShoot());
 		}
 	}
-	
+
 	public void elementTextContain(String dec,WebElement wel,String text){
 		if(wel.getText().contains(text)){
 			test.log(LogStatus.PASS, dec + " " + " was verify passed");
@@ -159,7 +225,7 @@ public class PageTest {
 			test.log(LogStatus.FAIL, dec + " " + " was verify failed. Expected: "+ text+ " - Actual: "+ wel.getText() + screenShoot());
 		}
 	}
-	
+
 	public void elementTextMatches(String dec,WebElement wel,String regex){
 		if(wel.getText().matches(regex)){
 			test.log(LogStatus.PASS, dec + " " + " was verify passed");

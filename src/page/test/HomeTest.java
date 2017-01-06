@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -67,17 +68,26 @@ public class HomeTest extends PageTest {
 		cart.waitElementVisible(cart.checkOutGuest, 30);
 		List<HashMap<String,String>> listGuestInfo = Excel.readXSLXFile("test-data/Product.xlsx", "GuestUser");
 		cart.inputGuestInfo(listGuestInfo.get(0));
+		test.log(LogStatus.INFO, "Guest information inputing" + shuttlePage());
 		cart.clickUtilClickable(cart.checkOutGuest, 30);
 		verifyBillToOfGuestUser(listGuestInfo.get(0));
 		cart.termsOfService.click();
-		cart.clickUtilClickable(cart.checkOut_button, 30);
+		cart.clickUtilInvisible(cart.checkOut_button, 30);
 		cart.clickUtilClickable(cart.viewOrder, 30);
 		
 		test.log(LogStatus.INFO, "Step 4 : Verify order information ***************************************");
 		ordersTest.verifyBillToAndShipToInfo(listGuestInfo.get(0));
 		cart.sleep(5);
 	}
-
+	
+	@Test
+	public void checkScreenShotShuttle(){
+		test.log(LogStatus.INFO, "Shuttle screenshot demo:" + shuttlePage());
+		String xpt= ".//*[@id='main']/div[2]/div[3]/div[3]/div[1]/div[2]/div";
+		test.log(LogStatus.INFO, "Shuttle element screenshot demo:" + shuttlePageElement(driver.findElement(By.xpath(xpt))));
+		test.log(LogStatus.INFO, "Shuttle element screenshot demo:" + shuttleElement(driver.findElement(By.xpath(xpt))));
+	}
+	
 	public void selectCategory(String category){
 		homeObject.waitElementVisible(homeObject.productCategory(category),30);
 		homeObject.productCategory(category).click();
@@ -87,7 +97,8 @@ public class HomeTest extends PageTest {
 
 	public void addProductAndVerify(HashMap<String,String> productData){
 		homeObject.addProduct(productData);
-		test.log(LogStatus.PASS, "Information of ordering-product: " + productData.get("ProductName") + screenShoot());
+		test.log(LogStatus.PASS, "Information of ordering-product: " 
+				+ productData.get("ProductName") + shuttleElement(homeObject.product_SS(productData.get("ProductName"))));
 		homeObject.addToCart_button(productData.get("ProductName")).click();
 		vefiryProductInfoOnCartPopUp(productData.get("ProductName"),productData.get("Quantity"));
 	}
@@ -126,7 +137,7 @@ public class HomeTest extends PageTest {
 		elementTextEqual("Phone", cart.billPhone, guestInfo.get("Phone"));
 		elementTextEqual("Mobile Phone", cart.billMobilePhone, guestInfo.get("MobilePhone"));
 		elementTextEqual("Fax", cart.billFax, guestInfo.get("Fax"));
-		test.log(LogStatus.INFO, "Bill to infomation" + screenShoot());
+		test.log(LogStatus.INFO, "Bill to infomation" + shuttleElement(cart.billShipTo_SS));
 		
 	}
 }

@@ -60,6 +60,6 @@ public class OrdersTest extends PageTest{
 		elementTextEqual("Phone", orders.shipToInfo("Phone"), info.get("Phone"));
 		elementTextEqual("Mobile phone", orders.shipToInfo("Mobile phone"), info.get("MobilePhone"));
 		elementTextEqual("Fax", orders.shipToInfo("Fax"), info.get("Fax"));
-		test.log(LogStatus.INFO, "Bill to and Ship to infomation" + screenShoot());
+		test.log(LogStatus.INFO, "Bill to and Ship to infomation" + shuttlePage());
 	}
 }
