@@ -1,15 +1,16 @@
-# SeleniumPageObject
-Selenium framework with TestNG<br>
-The project is a simple framework build for selenium and testNG.<br>
-The project uses:
-- Page object model.
-- <a href="http://extentreports.relevantcodes.com/">Extent report</a>
-- Excel for test data.
+# A exercise from GCS company (http://www.globalcybersoft.com/en/)
 
-# How to get and use the frame work
-1. Installation of Git support into Eclipse. Refer to : http://www.vogella.com/tutorials/EclipseGit/article.html
-2. Install TestNG in Eclipse. Refer to : http://toolsqa.com/selenium-webdriver/install-testng/
-3. Run test suite from TestNG : ![alt tag](https://github.com/yoyo13189/SeleniumPageObject/blob/master/images/runTestNG.png)
-4. You can find extent report into <b>test-reports</b> direction :</br>
-![alt tag](https://github.com/yoyo13189/SeleniumPageObject/blob/master/images/test-reports.png)
-![alt tag](https://github.com/yoyo13189/SeleniumPageObject/blob/master/images/extentReport.png)
+=============
+Develop an automation script to test this website : http://tranminhthanh.info/training/selenium/VirtualMart/
+
+Test scenario:
+
+1. Open this web page
+2. Select Headpiece product and add 3 Cowboy Hat with size XL to Cart
+3. Back to Home page, select Wear product and add 4 Handmade, Polyester Zipper Pullover to Cart.
+4. Open cart and do check out. -> Selenium script should verify what we’ve chosen
+5. Fill some required information then check out as guest
+6. Verify the inputted information and confirm purchase  -> Selenium script should verify our input information.
+7. When finishing the purchase, view your order and verify the order information -> Selenium script should verify our order information.
+
+=================
