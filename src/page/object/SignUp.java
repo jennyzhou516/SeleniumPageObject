@@ -3,7 +3,6 @@ package page.object;
 import java.util.HashMap;
 import java.util.List;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -11,6 +10,11 @@ import org.openqa.selenium.support.PageFactory;
 import pages.base.PageObject;
 
 public class SignUp extends PageObject {
+	
+	public SignUp(){
+		PageFactory.initElements(driver, this);
+	}
+	
 	// Define elements ****************************************************
 	@FindBy(name="btnG")
 	public WebElement search_btn;
@@ -91,13 +95,6 @@ public class SignUp extends PageObject {
 	public WebElement nextStep;
 
 
-
-
-	public SignUp(WebDriver driver){
-		super(driver);
-		PageFactory.initElements(driver, this);
-	}
-
 	// Define methods ****************************************************
 	public void langChooser(String lang){
 		dropDownListSelectValue(langChooser,"en");
@@ -109,6 +106,7 @@ public class SignUp extends PageObject {
 	}
 
 	public void inputData(HashMap<String,String> fieldData){
+		firstName.sendKeys(fieldData.get("FirstName"));
 		lastName.sendKeys(fieldData.get("LastName"));
 		gmailAddress.sendKeys(fieldData.get("UserName"));
 		passwd.sendKeys(fieldData.get("Passwd"));
@@ -123,6 +121,6 @@ public class SignUp extends PageObject {
 		}
 		recoveryPhoneNumber.sendKeys(fieldData.get("PhoneNumber"));
 		recoveryEmailAddress.sendKeys(fieldData.get("CurrentEmail"));
-		firstName.sendKeys(fieldData.get("FirstName"));
+		
 	}
 }

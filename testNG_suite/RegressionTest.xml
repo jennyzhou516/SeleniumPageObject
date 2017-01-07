@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Page Object test example">
-	<parameter name="browserType" value="firefox" />
+	<parameter name="browserType" value="chrome" />
 	<test name="Home page test">
 		<classes>
 			<class name="page.test.HomeTest" />
