@@ -5,7 +5,7 @@
 		<classes>
 			<class name="page.test.SignUpTest" >
 				<methods>
-					<include name="demoExcelDataprovider"></include>
+					<include name="demoExcelTestData"></include>
 				</methods>
 			</class>
 		</classes>

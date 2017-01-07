@@ -1,6 +1,5 @@
 package page.test;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -12,7 +11,6 @@ import page.object.SignUp;
 import pages.base.PageTest;
 
 public class HomeTest extends PageTest {
-	private WebDriver driver;
 	private Home homeObject ;
 	private SignUp signUPPage ;
 

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -16,7 +15,6 @@ import pages.base.PageTest;
 import utilites.Excel;
 
 public class SignUpTest extends PageTest {
-	private WebDriver driver;
 	private SignUp signUPPage;
 
 	public void initialPageObject() {
@@ -36,7 +34,6 @@ public class SignUpTest extends PageTest {
 	@Test
 	public void demoExcelTestData() {
 		test.log(LogStatus.INFO, "Verify create account with invalid data field");
-		// signUPPage.langChooser("English (United States)");
 		List<HashMap<String, String>> listData = new ArrayList<HashMap<String, String>>();
 		listData = Excel.readXSLXFile("test-data/CreateAcount.xlsx", "InvalidData");
 
@@ -47,7 +44,6 @@ public class SignUpTest extends PageTest {
 			System.out.println("Verify for case : " + listData.get(i).get("Description"));
 			signUPPage.inputData(listData.get(i));
 			test.log(LogStatus.INFO, "Screent Shoot after input data" + shuttlePage());
-			// signUPPage.nextStep.click();
 			signUPPage.sleep(3);
 			verifyMessageError(listData.get(i));
 			driver.navigate().to("https://accounts.google.com/SignUp");

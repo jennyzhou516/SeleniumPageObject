@@ -106,6 +106,7 @@ public class SignUp extends PageObject {
 	}
 
 	public void inputData(HashMap<String,String> fieldData){
+		firstName.sendKeys(fieldData.get("FirstName"));
 		lastName.sendKeys(fieldData.get("LastName"));
 		gmailAddress.sendKeys(fieldData.get("UserName"));
 		passwd.sendKeys(fieldData.get("Passwd"));
@@ -120,6 +121,6 @@ public class SignUp extends PageObject {
 		}
 		recoveryPhoneNumber.sendKeys(fieldData.get("PhoneNumber"));
 		recoveryEmailAddress.sendKeys(fieldData.get("CurrentEmail"));
-		firstName.sendKeys(fieldData.get("FirstName"));
+		
 	}
 }
