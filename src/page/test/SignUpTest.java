@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -26,7 +25,6 @@ public class SignUpTest extends PageTest {
 		driver.navigate().to("https://accounts.google.com/SignUp");
 		signUPPage=new SignUp(driver);
 	}
-
 	@Test
 	public void demoExcelTestData(){
 		test.log(LogStatus.INFO, "Verify create account with invalid data field");
